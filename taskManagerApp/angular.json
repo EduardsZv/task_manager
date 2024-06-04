@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "tmg",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -102,5 +102,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "3d59fc5e-f95f-4f7d-a2fa-ad974c58a754"
   }
 }
