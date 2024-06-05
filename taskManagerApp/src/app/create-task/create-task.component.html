@@ -1,13 +1,24 @@
 <form [formGroup]="createTaskForm" (ngSubmit)="submitTask()">
-    <label for="title">Title</label>
+    <label for="title">Title: </label>
     <input id="title" type="text" formControlName="title" />
-    <label for="desc">Description</label>
+    <br><br>
+    <label for="desc">Description: </label>
     <input id="desc" type="text" formControlName="description" />
-    <label for="type">Type</label>
-    <input id="type" type="text" formControlName="type" />
-    <label for="created-on">Created on</label>
-    <input id="created-on" type="text" formControlName="createdOn" />
-    <label for="status">Status</label>
-    <input id="status" type="text" formControlName="status" />
+    <br><br>
+    <label for="type">Type: </label>
+    <select id="type" formControlName="type">
+        <option value="study">Study</option>
+        <option value="workout">Workout</option>
+        <option value="personal">Personal</option>
+        <option value="groceries">Grocery list</option>
+    </select>
+    <br><br>
+    <input id="created-on" type="hidden" formControlName="createdOn" />
+    <label for="status">Status: </label>
+    <select id="status" formControlName="status">
+        <option value="completed">Completed</option>
+        <option value="unfinished">Unfinished</option>
+    </select>
+    <br><br>
     <button type="submit">Submit</button>
 </form>
