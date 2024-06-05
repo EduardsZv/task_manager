@@ -12,5 +12,9 @@ import jsonData from '../data/tasks.json';
 })
 export class DisplayTasksComponent {
   tasks: Task[] = jsonData.tasks;
+
+  deleteTask(i: number): Task[] {
+    return this.tasks.splice(i, 1);
+  }
   
 }
