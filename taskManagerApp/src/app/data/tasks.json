@@ -1,0 +1,10 @@
+{
+    "tasks": 
+    [
+        {"title": "Go to the gym", "description" : "Quick hour workout", "type" : "Workout", "created_on" : "vakar", "status" : "Unfinished"},
+        {"title": "Shopping", "description" : "1 egg, 2 milk, 3 bread", "type" : "Groceries", "created_on" : "aizvakar", "status" : "Completed"},
+        {"title": "Math homework", "description" : "hard", "type" : "Study", "created_on" : "sodien", "status" : "Unfinished"},
+        {"title": "Running", "description": "30 minute run", "type": "Workout","created_on": "20mins ago", "status": "Unfinished"},
+        {"title": "Clean my room","description": "Mop up the floors","type": "Personal","created_on": "idk","status": "Unfinished"}
+    ]
+}

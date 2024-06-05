@@ -2,12 +2,13 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import { ReactiveFormsModule} from '@angular/forms';
+import { DisplayTasksComponent } from '../display-tasks/display-tasks.component';
 
 
 @Component({
   selector: 'tmg-create-task',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DisplayTasksComponent],
   providers: [DatePipe],
   templateUrl: './create-task.component.html',
   styleUrl: './create-task.component.scss'
