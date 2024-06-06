@@ -10,5 +10,9 @@ export const routes: Routes = [
     {
         path: 'display-tasks-component',
         loadComponent: () => import('./display-tasks/display-tasks.component').then((c) => c.DisplayTasksComponent)
+    },
+    {
+        path: 'task-details-component',
+        loadComponent: () => import('./task-details/task-details.component').then((c) => c.TaskDetailsComponent)
     }
 ];
