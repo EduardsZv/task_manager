@@ -1,6 +1,5 @@
-<router-outlet></router-outlet>
 <div *ngFor="let task of tasks; let i = index">
-    <h2><a routerLink="/task-details-component" routerLinkActive="active" [state]="{ task: task }">{{task.title}}</a></h2>
+    <h2><a (click)="viewTaskDetail(i)">{{task.title}}</a></h2>
     <p><b>Description: </b> {{task.description}} </p>
     <p><b>Type: </b> {{task.type}} </p>
     <p><b>Created on: </b> {{task.created_on}} </p>

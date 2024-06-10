@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Task } from './tasks';
 import { CommonModule } from '@angular/common';
-import jsonData from '../data/tasks.json';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { TasksService } from '../services/tasks.service';
 
 @Component({
   selector: 'tmg-display-tasks',
@@ -13,19 +13,19 @@ import { RouterModule } from '@angular/router';
   styleUrl: './display-tasks.component.scss'
 })
 export class DisplayTasksComponent {
-  tasks: Task[] = jsonData.tasks;
+  taskService: TasksService = inject(TasksService);
+  tasks: Task[] = [];
 
-  deleteTask(i: number): Task[] {
-    return this.tasks.splice(i, 1);
+
+  constructor(private router: Router) {
+    this.tasks = this.taskService.getTasks();
   }
-
-  constructor(private router: Router) {}
-
+  deleteTask(taskId: number): void {
+    this.taskService.deleteTask(taskId);
+    this.tasks = this.taskService.getTasks(); // Update the local tasks array
+  }
   viewTaskDetail(taskId: number) {
-    this.router.navigate(['/task-details', taskId]);
-  }
-  selectTask(index: number) {
-    return this.tasks[index];
+    this.router.navigate(['/task-details-component', taskId]);
   }
   
 }

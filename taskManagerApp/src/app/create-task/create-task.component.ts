@@ -1,8 +1,9 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { ReactiveFormsModule} from '@angular/forms';
 import { DisplayTasksComponent } from '../display-tasks/display-tasks.component';
+import { TasksService } from '../services/tasks.service';
 
 
 @Component({
@@ -14,6 +15,9 @@ import { DisplayTasksComponent } from '../display-tasks/display-tasks.component'
   styleUrl: './create-task.component.scss'
 })
 export class CreateTaskComponent {
+
+  taskService: TasksService = inject(TasksService);
+
   createTaskForm = new FormGroup({
     title: new FormControl("", [
       Validators.required
@@ -33,16 +37,21 @@ export class CreateTaskComponent {
 
   constructor(private datePipe: DatePipe) {}
 
+  createTask(title: string, desc: string, type: string, createdOn: string, status: string) {
+    this.taskService.createTask(title, desc, type, createdOn, status);
+  }
+
   submitTask() {
       if (this.createTaskForm.valid) {
         let currTime = new Date();
-        let submit_time = this.datePipe.transform(currTime, 'yyyy-MM-dd HH:mm:ss');
+        let submit_time = this.datePipe.transform(currTime, 'HH:mm:ss');
         this.createTaskForm.get('createdOn')?.setValue(new Date().toString());
         console.log('Form Submitted', this.createTaskForm.value);
-        // Perform the submit action, e.g., send the data to a server
+        this.createTask(this.createTaskForm.controls['title'].value!, this.createTaskForm.controls['description'].value!, this.createTaskForm.controls['type'].value!, this.createTaskForm.controls['createdOn']. value!,this.createTaskForm.controls['status'].value!);
+
+        
       } else {
         console.log('Form is invalid');
-        // Optionally, mark all controls as touched to show errors
         this.createTaskForm.markAllAsTouched();
       }
     
