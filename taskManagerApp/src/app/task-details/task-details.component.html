@@ -1,7 +1,55 @@
-<div *ngIf="selectedTask">
-    <h2>{{ selectedTask.title }}</h2>
-    <p><b>Description: </b> {{selectedTask.description}} </p>
-    <p><b>Type: </b> {{selectedTask.type}} </p>
-    <p><b>Created on: </b> {{selectedTask.created_on}} </p>
-    <p><b>Status: </b> {{selectedTask.status}} </p>
+<div *ngIf="!taskEditable">
+    <div *ngIf="selectedTask">
+        <h2>{{ selectedTask.title }}</h2>
+        <p><b>Description: </b> {{selectedTask.description}} </p>
+        <p><b>Type: </b> {{selectedTask.type}} </p>
+        <p><b>Created on: </b> {{selectedTask.created_on}} </p>
+        <p><b>Status: </b> {{selectedTask.status}} </p>
+        <button (click)="toggleEdit()">Edit task</button>
+    </div>
+</div>
+
+<div *ngIf="taskEditable">
+    <form [formGroup]="editTaskForm" (ngSubmit)="submitTask()">
+        <div class="form-input">
+            <label for="title"><b>Title: </b></label>
+            <input id="title" name="title" type="text" formControlName="title" />
+            <div *ngIf="editTaskForm.controls['title'].hasError('required') && editTaskForm.controls['title'].touched"
+                class="form-error">Title cannot be empty!</div>
+        </div>
+
+        <div class="form-input">
+            <label for="desc"><b>Description: </b></label>
+            <input id="desc" type="text" formControlName="description" />
+            <div *ngIf="editTaskForm.controls['description'].hasError('required') && editTaskForm.controls['description'].touched"
+                class="form-error">Description cannot be empty!</div>
+            <div *ngIf="editTaskForm.controls['description'].hasError('maxlength') && editTaskForm.controls['description'].touched"
+                class="form-error">Description cannot be longer than 200 symbols!</div>
+        </div>
+
+        <div class="form-input">
+            <label for="type"><b>Type: </b></label>
+            <select id="type" formControlName="type">
+                <option value="Study">Study</option>
+                <option value="Workout">Workout</option>
+                <option value="Personal">Personal</option>
+                <option value="Groceries">Grocery list</option>
+            </select>
+            <div *ngIf="editTaskForm.controls['type'].hasError('required') && editTaskForm.controls['type'].touched"
+                class="form-error">Choose a type!</div>
+        </div>
+
+        <div class="form-input">
+            <input id="created-on" type="hidden" formControlName="createdOn" />
+            <label for="status"><b>Status: </b></label>
+            <select id="status" formControlName="status">
+                <option value="Completed">Completed</option>
+                <option value="Unfinished">Unfinished</option>
+            </select>
+            <div *ngIf="editTaskForm.controls['status'].hasError('required') && editTaskForm.controls['status'].touched"
+                class="form-error">Choose the status!</div>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
 </div>

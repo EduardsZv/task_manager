@@ -23,6 +23,10 @@ export class TasksService {
     this.tasks.push(newTask);
   }
 
+  editSelectedTask(id: number, title: string, desc: string, type: string, createdOn: string, status: string) {
+    this.tasks[id] = {title: title, description: desc, type: type, created_on: createdOn, status: status};
+  }
+
   deleteTask(i: number): Task[] {
     return this.tasks.splice(i, 1);
   }
