@@ -1,24 +1,42 @@
 <form [formGroup]="createTaskForm" (ngSubmit)="submitTask()">
-    <label for="title">Title: </label>
-    <input id="title" type="text" formControlName="title" />
-    <br><br>
-    <label for="desc">Description: </label>
-    <input id="desc" type="text" formControlName="description" />
-    <br><br>
-    <label for="type">Type: </label>
-    <select id="type" formControlName="type">
-        <option value="Study">Study</option>
-        <option value="Workout">Workout</option>
-        <option value="Personal">Personal</option>
-        <option value="Groceries">Grocery list</option>
-    </select>
-    <br><br>
-    <input id="created-on" type="hidden" formControlName="createdOn" />
-    <label for="status">Status: </label>
-    <select id="status" formControlName="status">
-        <option value="Completed">Completed</option>
-        <option value="Unfinished">Unfinished</option>
-    </select>
-    <br><br>
+    <div class="form-input">
+        <label for="title"><b>Title: </b></label>
+        <input id="title" name="title" type="text" formControlName="title" />
+        <div *ngIf="createTaskForm.controls['title'].hasError('required') && createTaskForm.controls['title'].touched"
+            class="form-error">Title cannot be empty!</div>
+    </div>
+
+    <div class="form-input">
+        <label for="desc"><b>Description: </b></label>
+        <input id="desc" type="text" formControlName="description" />
+        <div *ngIf="createTaskForm.controls['description'].hasError('required') && createTaskForm.controls['description'].touched"
+            class="form-error">Description cannot be empty!</div>
+        <div *ngIf="createTaskForm.controls['description'].hasError('maxlength') && createTaskForm.controls['description'].touched"
+            class="form-error">Description cannot be longer than 200 symbols!</div>
+    </div>
+
+    <div class="form-input">
+        <label for="type"><b>Type: </b></label>
+        <select id="type" formControlName="type">
+            <option value="Study">Study</option>
+            <option value="Workout">Workout</option>
+            <option value="Personal">Personal</option>
+            <option value="Groceries">Grocery list</option>
+        </select>
+        <div *ngIf="createTaskForm.controls['type'].hasError('required') && createTaskForm.controls['type'].touched"
+            class="form-error">Choose a type!</div>
+    </div>
+
+    <div class="form-input">
+        <input id="created-on" type="hidden" formControlName="createdOn" />
+        <label for="status"><b>Status: </b></label>
+        <select id="status" formControlName="status">
+            <option value="Completed">Completed</option>
+            <option value="Unfinished">Unfinished</option>
+        </select>
+        <div *ngIf="createTaskForm.controls['status'].hasError('required') && createTaskForm.controls['status'].touched"
+            class="form-error">Choose the status!</div>
+    </div>
+    
     <button type="submit">Submit</button>
 </form>

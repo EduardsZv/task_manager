@@ -1,5 +1,5 @@
 <div *ngFor="let task of tasks; let i = index">
-    <h2>{{task.title}}</h2>
+    <h2><a (click)="viewTaskDetail(i)">{{task.title}}</a></h2>
     <p><b>Description: </b> {{task.description}} </p>
     <p><b>Type: </b> {{task.type}} </p>
     <p><b>Created on: </b> {{task.created_on}} </p>
